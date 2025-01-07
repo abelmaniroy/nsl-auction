@@ -1,0 +1,46 @@
+{% extends 'navbar.html' %}
+{% block head %}
+<title>Create Player</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='pool_view.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Create Player</h1>
+
+    <form action="{{ url_for('create_player') }}" method="post">
+        <!-- Name -->
+        <div class="form-group mb-3">
+            <label for="name">Player Name:</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter player name" required>
+        </div>
+
+        <!-- Position -->
+        <div class="form-group mb-3">
+            <label for="pos">Position:</label>
+            <input type="text" id="pos" name="pos" class="form-control" placeholder="Enter position">
+        </div>
+
+        <!-- Achievements -->
+        <div class="form-group mb-3">
+            <label for="ach">Achievements:</label>
+            <textarea id="ach" name="ach" class="form-control" rows="3" placeholder="Enter achievements"></textarea>
+        </div>
+
+        <!-- Pool -->
+        <div class="form-group mb-3">
+            <label for="pool">Select Pool:</label>
+            <select id="pool" name="pool" class="form-control">
+                {% for pool_id in pools %}
+                <option value="{{ pool_id }}">Pool-{{ pool_id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Create Player</button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -45,9 +45,73 @@
             </div>
           </div>
           </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('create_player') }}">Add Player <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('reset_pouch') }}">Reset Pouch <span class="sr-only">(current)</span></a>
+
+            </li>
+
         </ul>
       </div>
     </nav>
+  <div class="floating-box-container-left">
+      {% for details in pouch[:4] %}
+            <div class="floating-box">
+            <div class="team-score">{{details.name}}: {{details.pouch}}L</div>
+            </div>
+      {% endfor %}
+  </div>
+  <div class="floating-box-container-right">
+      {% for details in pouch[4:] %}
+            <div class="floating-box">
+            <div class="team-score">{{details.name}}: {{details.pouch}}L</div>
+            </div>
+      {% endfor %}
+  </div>
+  <style>
+      .floating-box-container-left {
+        display: flex;
+        flex-direction: column;  /* Arrange boxes vertically */
+        align-items: center;     /* Align the boxes to the center */
+                /* Space from the top */
+       position: fixed;         /* Fixed position on the screen */
+        top: 50%;                /* Center vertically from the top */
+        left: 10px;                 /* Align to the left side */
+        transform: translateY(-50%);
+    }
+    .floating-box-container-right {
+        display: flex;
+        flex-direction: column;  /* Arrange boxes vertically */
+        align-items: right;     /* Align the boxes to the center */
+                /* Space from the top */
+       position: fixed;         /* Fixed position on the screen */
+        top: 50%;                /* Center vertically from the top */
+        right: 10px;                 /* Align to the left side */
+        transform: translateY(-50%);
+        }
+      .floating-box {
+    border-radius: 25px;
+    border: 2px solid red;
+
+    width: 200px;
+    background-color: #FFFFFF; /* Blue background */
+    color: red;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1000; /* Ensure it floats above other content */
+    margin-top: 10px;
+
+    }
+
+
+    .team-score {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+    }
+  </style>
   {% block content %}
   {% endblock %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

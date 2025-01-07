@@ -1,0 +1,30 @@
+.card-container {
+     display: grid;
+    grid-template-columns: repeat(2, 300px); /* 2 columns with 300px width each */
+    gap: 10px; /* Reduced gap to bring the columns closer together */
+    justify-items: center; /* Centers the items horizontally within their grid cells */
+    margin-top: 20px; /* Adjust the gap between the cards */
+}
+.out-class {
+    justify-items: center;
+    width:100%;
+}
+.container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+
+}
+
+.card-body {
+    text-align: center;
+    justify-items: center;
+}
+
+.button-div{
+    text-align: center;
+    justify-items: center;
+    position: relative;
+    top:30px;
+}

@@ -12,6 +12,11 @@
                     <a href="{{ url_for('pool_view', pool_id=pool_id) }}" class="btn btn-outline-primary btn-lg">Pool-{{ pool_id }}</a>
                 </div>
             {% endfor %}
+        <div class="col-auto p-2 pl-3">
+            <form action="{{ url_for('pool_view', pool_id=data.id) }}" method="post">
+            <button type="submit" class="btn btn-primary btn-lg">+</button>
+            </form>
+        </div>
     </div>
     <div class="container">
         <h1>Pool-{{data.id}}</h1>
@@ -20,7 +25,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Pos</th>
-                    <th>Status</th>
+                    <th>Team</th>
 
                 </tr>
             </thead>
@@ -30,7 +35,7 @@
 
                     <td>{{ row.name }}</td>
                     <td>{{ row.pos }}</td>
-                    <td>{{ row.status.name }}</td>
+                    <td>{{ row.sold_to }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

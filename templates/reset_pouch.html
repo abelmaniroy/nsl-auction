@@ -1,0 +1,27 @@
+{% extends 'navbar.html' %}
+{% block head %}
+<title>Reset Pouch</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='reset_pouch.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="out-class">
+    <form action="{{ url_for('reset_pouch') }}" method="post">
+        <div class="card-container">
+        {% for team in pouch %}
+            <div class="container">
+                <div class="card-body">
+                    <h6 class="card-title">{{ team.name }}</h6>
+                    <input type="number" id="team_{{ team.id }}" name="{{ team.id }}" min="1" value="{{team.pouch}}" required>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="button-div">
+            <button class="btn-outline-primary" type="submit">Submit</button>
+        </div>
+
+
+    </form>
+</div>
+{% endblock %}
