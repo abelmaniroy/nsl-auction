@@ -1,5 +1,6 @@
+import os
 import random
-
+from enum import unique
 
 from flask import Flask, redirect, url_for, request
 from flask import render_template
@@ -14,8 +15,10 @@ app = Flask(__name__)
 
 app.debug = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['UPLOAD_PATH'] = 'static/images'
 db = SQLAlchemy(app)
 session = db.session
+
 
 
 class Pool(db.Model):
@@ -44,6 +47,7 @@ class Player(db.Model):
     ach = db.Column(db.String)
     pool = db.Column(ForeignKey(Pool.id), nullable=False)
     team = db.Column(ForeignKey(Team.id), nullable=False)
+    img = db.Column(db.String,unique=True,default=os.path.join('static/images', "0"))
 
     # status = db.Column(db.Enum(Status), nullable=False, default=Status.pending)
 
@@ -163,6 +167,7 @@ def auction(pool_id):
 def reset_all():
     try:
         session.query(Player).update({Player.team: pending})
+        session.query(Team).update({Team.pouch: 100})
         session.commit()
         return redirect(url_for('home'))
     except Exception as e:
