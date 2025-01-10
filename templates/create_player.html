@@ -8,7 +8,7 @@
 <div class="container mt-5">
     <h1 class="mb-4">Create Player</h1>
 
-    <form action="{{ url_for('create_player') }}" method="post">
+    <form action="{{ url_for('create_player') }}" method="post" enctype="multipart/form-data">
         <!-- Name -->
         <div class="form-group mb-3">
             <label for="name">Player Name:</label>
@@ -18,7 +18,7 @@
         <!-- Position -->
         <div class="form-group mb-3">
             <label for="pos">Position:</label>
-            <input type="text" id="pos" name="pos" class="form-control" placeholder="Enter position">
+            <input type="text" id="pos" name="pos" class="form-control" placeholder="Enter position" required>
         </div>
 
         <!-- Achievements -->
@@ -36,6 +36,11 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="form-group mb-3">
+            <label for="image">Upload Player Image:</label>
+            <input type="file" id="image" name="image" class="form-control" accept="image/*">
+        </div>
+
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Create Player</button>

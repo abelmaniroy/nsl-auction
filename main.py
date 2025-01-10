@@ -1,5 +1,6 @@
 import os
 import random
+from email.policy import default
 from enum import unique
 
 from flask import Flask, redirect, url_for, request
@@ -8,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 
 from sqlalchemy.orm import backref
+from werkzeug.utils import secure_filename
 
 from constants import team_names, pending
 
@@ -47,8 +49,8 @@ class Player(db.Model):
     ach = db.Column(db.String)
     pool = db.Column(ForeignKey(Pool.id), nullable=False)
     team = db.Column(ForeignKey(Team.id), nullable=False)
-    img = db.Column(db.String,unique=True,default=os.path.join('static/images', "0"))
-
+    img = db.Column(db.String,default=os.path.join('static/images', "0"))
+    amount = db.Column(db.Float, default=0)
     # status = db.Column(db.Enum(Status), nullable=False, default=Status.pending)
 
     def __repr__(self):
@@ -104,7 +106,17 @@ def create_player():
             pos = request.form.get('pos')
             ach = request.form.get('ach')
             pool = request.form.get('pool')
+            image = request.files.get('image')
+
             player = Player(name=name, pos=pos, ach=ach, pool=pool, team=pending)
+            if image and image.filename != '':
+
+                filename = secure_filename(image.filename)
+                app.logger.warning(image.filename)
+                image_path = os.path.join(app.config['UPLOAD_PATH'], filename)
+                image.save(image_path)
+                player.img = filename
+
             session.add(player)
             session.commit()
             return redirect(url_for('pool_view', pool_id=pool))
@@ -142,6 +154,7 @@ def player_card(player_id):
             amount = request.form.get('amount')
 
             player.team = int(team_id)
+            player.amount = float(amount)
             team = player.sold_to
             team.pouch -= float(amount)
             app.logger.warning(player.sold_to.name + "   " + str(player.sold_to.pouch))
