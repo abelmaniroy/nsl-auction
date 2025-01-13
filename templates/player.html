@@ -30,12 +30,19 @@
 
 
             </div>
+            <div class="col">
+                <form action="{{ url_for('player_card', player_id=player.id) }}" method="post">
+                    <input type="hidden" name="team" value="1">
+                    <button class="btn fill">Mark Unsold</button>
+                </form>
+            </div>
             {% endif %}
             <div class="col">
                 <form action="{{ url_for('auction') }}" method="get">
                     <button class="btn fill">Next</button>
                 </form>
             </div>
+
 
         </div>
     </div>

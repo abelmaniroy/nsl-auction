@@ -12,7 +12,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import backref
 from werkzeug.utils import secure_filename
 
-from constants import team_names, pending
+from constants import team_names, pending, unsold
 
 app = Flask(__name__)
 
@@ -194,15 +194,18 @@ def player_card(player_id):
     if request.method == "POST":
         try:
             team_id = request.form.get('team')
+
             # team = Team.query.filter_by(name=)
             amount = request.form.get('amount')
 
             player.team = int(team_id)
-            player.amount = float(amount)
-            team = player.sold_to
-            team.pouch -= float(amount)
+            if player.team != unsold:
+                player.amount = float(amount)
+                team = player.sold_to
+                team.pouch -= float(amount)
             app.logger.warning(player.sold_to.name + "   " + str(player.sold_to.pouch))
             session.commit()
+            flash(f"Player transfer Complete",category="success")
 
         except Exception as e:
             session.rollback()  # Rollback in case of error
@@ -251,7 +254,7 @@ def reset_pouch():
 
 @app.route('/')
 def home():
-    return render_template('home.html', pouch=get_pouch())
+    return redirect(url_for('player_list'))
 
 def export_players_to_excel(file_path):
     try:
