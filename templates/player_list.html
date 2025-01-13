@@ -1,0 +1,40 @@
+
+{% extends 'navbar.html' %}
+{% block head %}
+    <title>Pools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pool_view.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Player Auction</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+
+                    <th>Team</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr onclick="location.href='{{ url_for('edit_player', player_id=row.id) }}'" style="cursor: pointer;">
+
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.sold_to }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-container">
+            <form action="{{ url_for('auction', pool_id=data.id) }}" method="get">
+                <button type="submit" class="start-auction-btn">Start Auction</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+

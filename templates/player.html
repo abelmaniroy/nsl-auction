@@ -6,19 +6,20 @@
 
 {% block content %}
 <div class="centering-box">
-    <div class="container-card">
-        <div class="banner-image" style="background-image: url('{{ url_for('static', filename='images/' + player.img) }}');">
-        </div>
-        <div class="column-text">
-            <h1> {{player.name}}</h1>
+<!--    <div class="container-card">-->
+<!--        <div class="banner-image" style="background-image: url('{{ url_for('static', filename='images/' + player.img) }}');">-->
+<!--        </div>-->
+<!--        <div class="column-text">-->
+<!--            <h1> {{player.name}}</h1>-->
 
-            <p>{{player.pos}}</p>
-            <p>{{player.ach}}</p>
+<!--            <p>{{player.pos}}</p>-->
+<!--            <p>{{player.ach}}</p>-->
 
 
-        </div>
-    </div>
-
+<!--        </div>-->
+<!--    </div>-->
+    <div class="banner-image" style="background-image: url('{{ url_for('static', filename='images/' + player.img) }}');">-->
+<!--        </div>-->
     <div class="button-container">
         <div class="row align-items-center justify-content-center">
             {% if player.team == 0 %}
@@ -31,7 +32,7 @@
             </div>
             {% endif %}
             <div class="col">
-                <form action="{{ url_for('auction', pool_id=player.pool) }}" method="get">
+                <form action="{{ url_for('auction') }}" method="get">
                     <button class="btn fill">Next</button>
                 </form>
             </div>

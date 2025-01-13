@@ -1,12 +1,12 @@
 body {
   /* solid background */
-  background: rgb(0,212,255);
+
 
   /* gradient background*/
-  background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(11,3,45,1) 100%);
+
 
   /* photo background */
-  background-image: url(https://images.unsplash.com/photo-1619204715997-1367fe5812f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80);
+  background-image: url('/static/images/abigail-keenan-8-s5QuUBtyM-unsplash.jpg');
   background-size: cover;
   background-position: center;
 
@@ -63,18 +63,18 @@ body {
 
 .banner-image {
     margin:10px;
-    background-image: url('/static/images/image_0.JPG');;
+    border-radius: 12px;
   background-position: center;
   background-size: cover;
-  height: 300px;
-  width: 300px;
-  border-radius: 12px;
+  height: 600px;
+  width: 600px;
+
   border: 1px solid rgba(255, 255, 255, 0.255);
 
 }
 
 .button-container {
-    margin-top:80px;
+    margin-top:600px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -15,27 +15,7 @@
             <input type="text" id="name" name="name" class="form-control" placeholder="Enter player name" required>
         </div>
 
-        <!-- Position -->
-        <div class="form-group mb-3">
-            <label for="pos">Position:</label>
-            <input type="text" id="pos" name="pos" class="form-control" placeholder="Enter position" required>
-        </div>
 
-        <!-- Achievements -->
-        <div class="form-group mb-3">
-            <label for="ach">Achievements:</label>
-            <textarea id="ach" name="ach" class="form-control" rows="3" placeholder="Enter achievements"></textarea>
-        </div>
-
-        <!-- Pool -->
-        <div class="form-group mb-3">
-            <label for="pool">Select Pool:</label>
-            <select id="pool" name="pool" class="form-control">
-                {% for pool_id in pools %}
-                <option value="{{ pool_id }}">Pool-{{ pool_id }}</option>
-                {% endfor %}
-            </select>
-        </div>
         <div class="form-group mb-3">
             <label for="image">Upload Player Image:</label>
             <input type="file" id="image" name="image" class="form-control" accept="image/*">
